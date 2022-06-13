@@ -1,7 +1,10 @@
 import './App.css';
-import Expenses from './components/Expenses';
+import Expenses from './components/Expenses/Expenses';
+import NewExpenses from './components/NewExpenses/NewExpenses';
+import Card from './components/UI/Card';
+import React, {useState} from 'react';
 function App() {
-  const expenses = [
+  const DUMMY_EXPENSES = [
     {
       id: 'e1',
       title: 'Toilet Paper',
@@ -22,10 +25,24 @@ function App() {
       date: new Date(2021, 5, 12),
     },
   ];
+
+  const [expenses, setExpenses]=useState(DUMMY_EXPENSES);
+
+
+  const addExpenseData = expense => {
+    debugger
+    setExpenses((prevExpenses) => {
+      return [expense];
+    });
+    console.log(expense.title);
+    console.log(expenses[0].title);
+
+  };
   return (
-    <div>
+    <Card>
+      <NewExpenses onAddExpenseData={addExpenseData}/>
       <Expenses items={expenses} />
-     </div>
+     </Card>
   );
 }
 
